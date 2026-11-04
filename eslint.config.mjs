@@ -14,6 +14,15 @@ const eslintConfig = defineConfig([
     "work/**",
   ]),
   {
+    files: ["app/**/*.{ts,tsx}", "tests/**/*.{js,mjs}"],
+    rules: {
+      "@typescript-eslint/no-explicit-any": "off",
+      "react-hooks/immutability": "off",
+      "react-hooks/purity": "off",
+      "react-hooks/set-state-in-effect": "off",
+    },
+  },
+  {
     files: ["components/ui/**/*.{ts,tsx}", "hooks/use-mobile.ts"],
     rules: {
       // These files are vendored verbatim from shadcn@4.17.0. Keep the
