@@ -5,6 +5,42 @@
 .crate-front>div{height:31px;min-height:31px;background:linear-gradient(0deg,#c5a576,#e2c797);box-shadow:0 2px 2px #6a4a3330;border-top:1px solid #f2dcaf}.fresh-tag{flex-wrap:wrap;max-width:165px}.fresh-tag small{display:block;width:100%;font-size:8px;margin-left:18px;color:#95a183}.harvest-label{display:flex;align-items:center;gap:10px}.harvest-label>span{font-family:Georgia;font-size:32px;color:#9aa889}.harvest-label small{display:block;font-size:8px}.farmer-art-tag{display:flex;align-items:center;gap:12px}.map-hub,.map-city{flex-wrap:wrap;max-width:160px}.map-hub small,.map-city small{width:100%;font-size:8px}.activity-row{width:100%;gap:12px;text-align:left}.activity-row>span:nth-child(2){flex:1}.header-title>span{display:flex;align-items:center;gap:10px}.demo-strip .demo-detail{padding:0;background:none;font-size:9px;text-align:left}.page-title .eyebrow{font-size:9px;margin-bottom:8px}.welcome-art>svg:last-child{position:absolute;left:-45px;bottom:-35px;width:60%;height:70%}.farmer-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.farmer-actions>button{background:#fffefb;border:1px solid var(--line);border-radius:10px;padding:22px;text-align:left;position:relative}.farmer-actions>button>svg:last-child{position:absolute;right:17px;top:18px;width:17px;color:#869a72}.farmer-actions .icon-square{display:inline-flex;margin-bottom:20px}.farmer-actions h3{font-size:15px}.farmer-actions p{font-size:10px;color:var(--muted);margin-top:6px}.section-toolbar{justify-content:space-between}.section-toolbar>p{font-size:11px;color:var(--muted)}.section-toolbar h3{font-size:15px}.calc-result>strong>small{display:block;font-size:11px;font-weight:400;margin-top:7px;color:#c4ceb7;letter-spacing:0}.calc-result .eyebrow{color:#b9c9a6}.calc-result .negative{color:#f3d8ac}.red-text{color:#b1785f}.panel>form{margin-top:24px}.cart-drawer{margin-left:auto;max-height:100vh;height:100vh;border-radius:14px 0 0 14px;width:460px}.modal-backdrop:has(.cart-drawer){padding:0}.cart-bottom>div{display:flex;justify-content:space-between;gap:15px;font-size:10px;color:var(--muted);margin-bottom:12px}.cart-bottom>div b{font-weight:500;white-space:nowrap}.cart-bottom>.cart-total{font-size:16px;color:var(--ink);border-top:1px solid var(--line);padding-top:17px;margin-top:17px}.cart-row>div:last-child{text-align:right;font-size:11px}.cart-row .text-button{display:block;font-size:9px;margin-top:5px}.product-detail{padding:25px}.product-detail>strong{font-size:25px}.product-detail>strong small{font-size:12px;font-weight:400}.detail-art{position:relative}.detail-art small{position:absolute;bottom:10px;left:15px;font-size:9px;color:#9aa58e}.light-mode .product-picture svg,.light-mode .welcome-art,.light-mode .catalog-banner>svg{display:none}.light-mode .product-picture{height:65px}.sidebar nav b{margin-left:auto;background:#dce6cf;border-radius:4px;padding:0 5px;font-size:9px}.account>span{width:31px;height:31px;background:#e7eddd;border-radius:50%;display:grid;place-items:center;font-weight:600}.help-card>button{font-size:10px;display:flex;align-items:center;justify-content:space-between;width:100%;padding:0;color:#829472}.modal>header .eyebrow{margin-bottom:6px;font-size:9px}body:has(.modal-backdrop){overflow:hidden}@media(max-width:600px){.farmer-actions{gap:9px}.farmer-actions>button{padding:13px}.farmer-actions h3{font-size:12px}.farmer-actions p{font-size:9px}.farmer-actions .icon-square{padding:8px;margin-bottom:13px}.farmer-actions .icon-square svg{width:20px}.farmer-actions>button>svg:last-child{width:12px;right:7px;top:10px}.cart-drawer{width:100%;border-radius:0}.header-title>span{display:none}.demo-strip .demo-detail{display:none}.list-heading{font-size:10px}.list-heading small{font-size:8px}.modal-content .notice{font-size:10px}}
 
 /* Hosilink design system */
+/* Hosil Radar */
+.radar-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.radar-card {
+  padding: 22px;
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-success);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
+.radar-card.risk-red { border-left-color: var(--color-danger); }
+.radar-card.risk-amber { border-left-color: var(--color-warning); }
+.radar-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  color: var(--color-muted);
+  font-size: 11px;
+}
+
+.radar-card h3 { font-size: 18px; }
+.radar-card > p { margin: 10px 0 16px; color: var(--color-muted); }
+.radar-values { display: flex; gap: 24px; color: var(--color-muted); font-size: 12px; }
+.radar-values span { display: grid; gap: 3px; }
+.radar-values b { color: var(--color-text); font-size: 16px; }
+
+@media (max-width: 800px) {
+  .radar-list { grid-template-columns: 1fr; }
+}
+
 :root {
   --color-forest: #24533a;
   --color-forest-strong: #173c29;
