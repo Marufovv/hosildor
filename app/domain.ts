@@ -18,7 +18,7 @@ const date=()=>new Date().toISOString().slice(0,10);
 export function seed():State {
  const products=catalogRows.map((r,i)=>({id:r[0],name:r[1],category:r[2],cost:r[3],variety:r[4],art:r[5],markup:15,unit:'kg',minGrams:1000,farmer:'F-'+String(i%10+1).padStart(3,'0'),origin:i%2?'Oltiariq':'Farg‘ona',grade:'I nav',enabled:!['shaftoli','orik','tarvuz','qovun'].includes(String(r[0]))}));
  const lots=products.filter((p:any)=>p.enabled).map((p:any,i:number)=>({id:'LOT-'+(i+1),productId:p.id,farmerId:p.farmer,grams:(i%4+2)*100000,reserved:0,cost:p.cost,zone:p.category==='Ko‘katlar'?'Sovuq zona B':'Sovuq zona A',expires:new Date(Date.now()+4*86400000).toISOString().slice(0,10),createdAt:now(),quality:'Qabul qilingan'}));
- return {products,lots,commitments:[],orders:[],ledger:[],expenses:[],claims:[],subscriptions:[],applications:[],recommendations:[],audit:[],closedPeriods:[],keys:[],farmers:Array.from({length:10},(_,i)=>({id:'F-'+String(i+1).padStart(3,'0'),name:'Namuna xo‘jalik '+(i+1),region:i%2?'Oltiariq':'Farg‘ona'})),buyers:Array.from({length:20},(_,i)=>({id:'B-'+(i+1),name:'Namuna oshxona '+(i+1)})),vehicles:[{id:'V-01',name:'Sovutgichli transport 01',capacity:2500000},{id:'V-02',name:'Sovutgichli transport 02',capacity:2500000}],settings:{markup:15,rent:12000000,utilities:3000000,payroll:25000000,other:4000000,routeCost:500000,packPerKg:150,loss:2,workDays:26,capacity:150000,minOrder:100000,buyerLimit:0,paymentDays:0,hub:'Oltiariq tumani',hubAddress:'Aniq manzil kiritilmagan',cutoff:'18:00',zones:['Farg‘ona shahri','Oltiariq tumani'],light:false},profile:{company:'Namuna oshxona',phone:'',address:'',zone:'Farg‘ona shahri',person:''}};
+ return {products,lots,commitments:[],orders:[],ledger:[],expenses:[],claims:[],subscriptions:[],preorders:[],priceAlerts:[],applications:[],recommendations:[],audit:[],closedPeriods:[],keys:[],farmers:Array.from({length:10},(_,i)=>({id:'F-'+String(i+1).padStart(3,'0'),name:'Namuna xo‘jalik '+(i+1),region:i%2?'Oltiariq':'Farg‘ona'})),buyers:Array.from({length:20},(_,i)=>({id:'B-'+(i+1),name:'Namuna oshxona '+(i+1)})),vehicles:[{id:'V-01',name:'Sovutgichli transport 01',capacity:2500000},{id:'V-02',name:'Sovutgichli transport 02',capacity:2500000}],settings:{markup:15,rent:12000000,utilities:3000000,payroll:25000000,other:4000000,routeCost:500000,packPerKg:150,loss:2,workDays:26,capacity:150000,minOrder:100000,buyerLimit:0,paymentDays:0,hub:'Oltiariq tumani',hubAddress:'Aniq manzil kiritilmagan',cutoff:'18:00',zones:['Farg‘ona shahri','Oltiariq tumani'],light:false},profile:{company:'Namuna oshxona',phone:'',address:'',zone:'Farg‘ona shahri',person:''}};
 }
 export function stock(s:State,pid:string){return s.lots.filter((l:any)=>l.productId===pid).reduce((n:number,l:any)=>n+l.grams-l.reserved,0)}
 export function promised(s:State,pid:string){return s.commitments.filter((c:any)=>c.productId===pid&&c.status==='approved').reduce((n:number,c:any)=>n+c.grams-c.reserved,0)}
@@ -27,7 +27,7 @@ export function paid(s:State,oid:string){return s.ledger.filter((e:any)=>e.order
 export function returned(s:State,oid:string){return -s.ledger.filter((e:any)=>e.orderId===oid&&e.kind==='sale_return').reduce((n:number,e:any)=>n+e.amount,0)}
 export function stats(s:State){const sum=(k:string)=>s.ledger.filter((e:any)=>e.kind===k).reduce((n:number,e:any)=>n+e.amount,0);const revenue=sum('sale')+sum('sale_return'),cogs=sum('cogs')+sum('cogs_return'),expenses=s.expenses.reduce((n:number,e:any)=>n+e.amount,0);return {revenue,cogs,expenses,gross:revenue-cogs,profit:revenue-cogs-expenses,receivable:s.orders.filter((o:any)=>o.status!=='cancelled').reduce((n:number,o:any)=>n+Math.max(0,totals(o)-returned(s,o.id)-paid(s,o.id)),0),payable:sum('purchase')-sum('farmer_payment'),cash:sum('payment')-sum('refund')-sum('farmer_payment')-expenses,inventory:s.lots.reduce((n:number,l:any)=>n+lineAmount(l.cost,l.grams),0)}}
 const permissions:Record<string,string[]>={
- checkout:['buyer'],cancel:['buyer','operator'],profile:['buyer'],subscription:['buyer'],claim:['buyer'],offer:['farmer'],approve:['operator'],receive:['warehouse','quality'],advance:['operator','warehouse','driver'],payment:['accountant'],expense:['accountant','operator'],settle:['accountant'],return:['operator','accountant'],  close:['accountant'],settings:['admin'],prices:['admin'],application:['buyer','farmer'],assign:['operator'],radarRefresh:['operator'],radarResolve:['operator'],light:['buyer','farmer','operator','warehouse','driver','accountant','quality']};
+ checkout:['buyer'],cancel:['buyer','operator'],profile:['buyer'],subscription:['buyer'],claim:['buyer'],offer:['farmer'],approve:['operator'],receive:['warehouse','quality'],advance:['operator','warehouse','driver'],payment:['accountant'],expense:['accountant','operator'],settle:['accountant'],return:['operator','accountant'],  close:['accountant'],settings:['admin'],prices:['admin'],application:['buyer','farmer'], assign:['operator'],radarRefresh:['operator'],radarResolve:['operator'],preorder:['buyer'],discountApprove:['operator'],light:['buyer','farmer','operator','warehouse','driver','accountant','quality']};
 function fail(message:string):never{throw new Error(message)}
 function integer(v:any,min=0,max=1e12){if(!Number.isSafeInteger(v)||v<min||v>max)fail('Miqdor yoki summa noto‘g‘ri.');return v}
 function text(v:any,max=500){if(typeof v!=='string'||!v.trim()||v.length>max)fail('Majburiy maydonni to‘ldiring.');return v.trim()}
@@ -116,6 +116,19 @@ export function transition(input:State,action:string,p:any,role:string,key:strin
   recommendation.resolvedAt=now();
   recommendation.resolution=text(p.note||'Operator tasdiqladi',500);
   subject=recommendation.id;
+ }else if(action==='preorder'){
+  const product=s.products.find((item:any)=>item.id===p.productId&&item.enabled);if(!product)fail('Mahsulot topilmadi.');
+  const grams=integer(p.grams,1000,10000000), deliveryDate=text(p.deliveryDate,10);
+  if(deliveryDate<date())fail('Yetkazish sanasi noto‘g‘ri.');
+  s.preorders.push({id:id('PRE'),productId:product.id,productName:product.name,grams,deliveryDate,note:String(p.note??'').slice(0,300),status:'pending',at:now()});
+  subject=product.name;
+ }else if(action==='discountApprove'){
+  const lot=s.lots.find((item:any)=>item.id===p.lotId);if(!lot)fail('Lot topilmadi.');
+  const product=s.products.find((item:any)=>item.id===lot.productId);if(!product)fail('Mahsulot topilmadi.');
+  const floor=Math.ceil(product.cost*0.95), price=integer(p.price,1);
+  if(price<floor)fail(`Narx ${money(floor)} so‘m/kg pastki chegaradan past bo‘lmasligi kerak.`);
+  s.priceAlerts.push({id:id('PRICE'),lotId:lot.id,productId:product.id,price,approvedAt:now(),status:'active'});
+  subject=lot.id;
  }else if(action==='light'){s.settings.light=!!p.value;
  }else fail('Noma’lum amal.');
  s.audit.unshift({id:id('A'),at:now(),role,action,subject});s.keys.push(key);

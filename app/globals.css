@@ -197,4 +197,12 @@ button.filter-tabs button {
     --color-muted: #adb9a9;
     --white: #17231c;
   }
+
+  .advisor-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
+  .advisor-wide,.advisor-result{grid-column:1/-1}
+  .chemical-tools{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .upload-box{min-height:180px;border:1.5px dashed var(--border);border-radius:var(--radius-lg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;cursor:pointer;background:color-mix(in srgb,var(--surface) 92%,var(--cream))}
+  .upload-box input{position:absolute;inline-size:1px;block-size:1px;opacity:0}
+  .advisor-result p{white-space:pre-wrap;line-height:1.65}
+  @media(max-width:760px){.advisor-grid,.chemical-tools{grid-template-columns:1fr}.advisor-wide,.advisor-result{grid-column:auto}}
 }
