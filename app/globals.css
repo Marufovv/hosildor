@@ -268,3 +268,188 @@ button.filter-tabs button {
   .advisor-result p{white-space:pre-wrap;line-height:1.65}
   @media(max-width:760px){.advisor-grid,.chemical-tools{grid-template-columns:1fr}.advisor-wide,.advisor-result{grid-column:auto}}
 }
+
+/* 2026 visual reset: keep the established green palette, remove legacy editorial styling. */
+:root {
+  --font-display: "Manrope", "DM Sans", Arial, sans-serif;
+  --radius-xl: 28px;
+  --shadow-card: 0 24px 70px rgba(31, 55, 38, .10);
+}
+
+body { font-family: "DM Sans", "Manrope", Arial, sans-serif; }
+h1, h2, .section-top h2, .farmer-copy h2, .region-section h2, .role-card h3, .advisor-grid .panel h3 {
+  font-family: var(--font-display);
+  letter-spacing: -.055em;
+  font-weight: 750;
+}
+
+.announcement {
+  min-height: 36px;
+  border-bottom: 1px solid rgba(47, 80, 56, .08);
+}
+
+.landing-header {
+  height: 88px;
+  max-width: 1240px;
+}
+
+.landing-header nav a {
+  font-weight: 650;
+  color: #526158;
+}
+
+.landing-header .btn { border-radius: 12px; min-height: 48px; }
+.landing-header .plain-button { min-height: 48px; }
+
+.hero {
+  max-width: 1240px;
+  min-height: 650px;
+  grid-template-columns: minmax(0, .92fr) minmax(380px, 1.08fr);
+  gap: 54px;
+  padding-top: 58px;
+  padding-bottom: 58px;
+}
+
+.hero::before {
+  right: 1%;
+  bottom: -200px;
+  width: 620px;
+  height: 620px;
+  background: radial-gradient(circle, rgba(190, 211, 155, .55), rgba(245, 247, 239, .1) 55%, transparent 70%);
+}
+
+.hero-copy h1 {
+  max-width: 620px;
+  font-size: clamp(54px, 6vw, 78px);
+  line-height: .96;
+  letter-spacing: -.065em;
+}
+
+.hero-copy h1 em {
+  color: #607b55;
+  font-style: normal;
+}
+
+.hero-copy > p {
+  max-width: 540px;
+  font-size: 17px;
+  line-height: 1.72;
+}
+
+.hero-kicker {
+  border: 0;
+  background: #edf2e7;
+  border-radius: 999px;
+  padding-inline: 14px;
+}
+
+.hero-actions .btn {
+  min-height: 54px;
+  border-radius: 14px;
+  font-size: 15px;
+}
+
+.hero-visual {
+  height: 520px;
+  overflow: hidden;
+  border: 1px solid rgba(73, 96, 75, .12);
+  border-radius: var(--radius-xl);
+  background: linear-gradient(155deg, #f6f4e9, #e8efdf);
+  box-shadow: var(--shadow-card);
+}
+
+.hero-visual .crate-scene {
+  transform: scale(.91);
+  transform-origin: center 50%;
+}
+
+.hero-visual .visual-caption {
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 0;
+  margin: 0;
+  padding: 16px 4px;
+}
+
+.hero-stamp {
+  right: 24px;
+  top: 22px;
+}
+
+.platform-strip {
+  padding-top: 92px;
+  padding-bottom: 92px;
+}
+
+.platform-heading h2 {
+  font-size: 48px;
+  letter-spacing: -.05em;
+}
+
+.role-card {
+  min-height: 290px;
+  border-radius: var(--radius-xl);
+  background: rgba(255, 255, 251, .92);
+  box-shadow: 0 14px 50px rgba(37, 59, 43, .07);
+}
+
+.role-card-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+}
+
+.role-card h3 {
+  font-size: 25px;
+  line-height: 1.12;
+}
+
+.role-card p { font-size: 15px; }
+
+.category-showcase-card {
+  min-height: 290px;
+  border-radius: var(--radius-xl);
+}
+
+.farmer-section {
+  border: 1px solid rgba(47,80,56,.10);
+  border-radius: var(--radius-xl) !important;
+  box-shadow: 0 24px 80px rgba(31,55,38,.08);
+}
+
+.btn, button {
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+
+@media (max-width: 900px) {
+  .announcement { font-size: 10px; min-height: 34px; }
+  .landing-header { height: 76px; }
+  .hero {
+    min-height: auto;
+    gap: 30px;
+    padding-top: 34px;
+    padding-bottom: 42px;
+  }
+  .hero-copy h1 {
+    font-size: clamp(46px, 14vw, 66px);
+    line-height: .98;
+  }
+  .hero-copy > p { font-size: 15px; }
+  .hero-visual {
+    height: 330px;
+    border-radius: 22px;
+  }
+  .hero-visual .crate-scene {
+    transform: scale(.62);
+    transform-origin: center top;
+    height: 400px;
+    margin-left: -5%;
+    width: 110%;
+  }
+  .hero-stamp { display: none; }
+  .platform-strip { padding-top: 58px; }
+  .platform-heading h2 { font-size: 38px; }
+  .role-card { min-height: 250px; }
+  .farmer-section { border-radius: 22px !important; }
+}
