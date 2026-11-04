@@ -12,6 +12,68 @@
   gap: 18px;
 }
 
+/* Hosilink 2026 landing polish */
+:root {
+  --color-primary: #2f5038;
+  --color-primary-strong: #203b29;
+  --color-accent: #e7a83b;
+  --color-surface: #fffef8;
+  --color-surface-soft: #f3f5ed;
+  --color-border: #dce3d6;
+  --color-text: #17251f;
+  --color-muted: #69766d;
+  --shadow-soft: 0 18px 60px rgba(43, 66, 48, .11);
+  --radius-lg: 24px;
+}
+
+.landing-header { border-bottom: 1px solid rgba(52,75,58,.08); }
+.hero { position: relative; overflow: hidden; }
+.hero::before { content: ""; position: absolute; width: 520px; height: 520px; right: -180px; bottom: -260px; border-radius: 50%; background: radial-gradient(circle, rgba(193,205,145,.3), transparent 68%); pointer-events: none; }
+.hero-kicker { width: fit-content; display: inline-flex; align-items: center; gap: 9px; margin-bottom: 18px; padding: 8px 12px; border: 1px solid var(--color-border); border-radius: 999px; background: rgba(255,255,255,.7); color: var(--color-muted); font-size: 11px; font-weight: 700; }
+.hero-copy h1 { font-size: clamp(52px, 6vw, 82px); line-height: .98; }
+.hero-copy h1 em { display: inline-block; color: #607b55; }
+.hero-actions .btn { min-height: 52px; border-radius: 12px; }
+.hero-actions .primary { box-shadow: 0 12px 26px rgba(47,80,56,.18); }
+.platform-strip { padding-top: 38px; padding-bottom: 88px; }
+.platform-heading { display: grid; grid-template-columns: 1fr minmax(280px, 430px); gap: 40px; align-items: end; margin-bottom: 28px; }
+.platform-heading h2, .farmer-copy h2 { color: var(--color-text); }
+.platform-heading p { color: var(--color-muted); line-height: 1.75; }
+.role-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.role-card { min-height: 264px; padding: 26px; display: flex; flex-direction: column; align-items: flex-start; text-align: left; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface); box-shadow: 0 12px 34px rgba(52,75,58,.06); transition: transform .2s, box-shadow .2s, border-color .2s; }
+.role-card:hover { transform: translateY(-5px); border-color: #aebb9c; box-shadow: var(--shadow-soft); }
+.role-card-icon { width: 50px; height: 50px; display: grid; place-items: center; margin-bottom: 24px; border-radius: 16px; }
+.role-card-icon svg { width: 24px; height: 24px; }
+.role-card-icon.green { color: white; background: var(--color-primary); }
+.role-card-icon.cream { color: #7b5630; background: #f2e7d2; }
+.role-card-icon.amber { color: #805512; background: #f6dfaa; }
+.role-card > small { margin-bottom: 5px; color: var(--color-muted); font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.role-card h3 { font-family: Georgia, serif; font-size: 24px; font-weight: 400; }
+.role-card p { margin-top: 10px; color: var(--color-muted); line-height: 1.65; }
+.role-card-link { margin-top: auto; padding-top: 24px; display: inline-flex; align-items: center; gap: 8px; color: var(--color-primary); font-weight: 800; }
+.farmer-section { border-radius: 32px; background: linear-gradient(135deg, #edf1e5, #f7f4e8); padding: 55px 62px !important; }
+.advisor-grid { max-width: 1120px; }
+.advisor-grid .panel { border-radius: 20px; box-shadow: 0 12px 38px rgba(37,60,43,.07); }
+.advisor-grid .panel h3 { margin-top: 14px; font-family: Georgia, serif; font-size: 25px; }
+.advisor-grid form { margin-top: 20px; }
+.advisor-grid .notice { border-radius: 14px; }
+.advisor-grid input { min-height: 48px; }
+.upload-box { position: relative; overflow: hidden; border-color: #aebb9c !important; background: linear-gradient(135deg, #f4f7ef, #fffaf1) !important; }
+.upload-box::after { content: "AI · xavfsiz demo"; position: absolute; right: 14px; bottom: 14px; color: var(--color-muted); font-size: 10px; }
+.advisor-result { background: linear-gradient(135deg, #fffef8, #eef4e7); }
+
+@media (max-width: 900px) {
+  .role-cards { grid-template-columns: 1fr; }
+  .platform-heading { grid-template-columns: 1fr; gap: 14px; }
+  .landing-header { padding-inline: 20px; }
+  .landing-header nav { display: none; }
+  .hero { padding-inline: 24px; grid-template-columns: 1fr; }
+  .hero-copy h1 { font-size: clamp(48px, 13vw, 68px); }
+  .hero-actions { flex-direction: column; align-items: stretch; }
+  .hero-actions .btn { width: 100%; }
+  .farmer-section { padding: 36px 24px !important; }
+  .platform-strip { padding-inline: 20px; }
+}
+
 .radar-card {
   padding: 22px;
   border: 1px solid var(--color-border);
